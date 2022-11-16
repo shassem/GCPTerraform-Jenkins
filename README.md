@@ -5,7 +5,8 @@ Creating infrastructure and deployment process to implement and configue secure 
 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
 
-## Tools
+## Illustration
+### Tools
 - Terraform
 - Google Cloud Platform (GCP)
 - Jenkins
