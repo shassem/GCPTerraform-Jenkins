@@ -11,8 +11,9 @@ I used a private VM Instance to connect to an all-private GKE Cluster.
 - Jenkins
 Each tool implementations are written in its section.
 
-All the work is applied on a single GCP project and region: us-central1.
+All work is applied on a single GCP project and region: us-central1.
 Variables can be changed.
+
 ### Terraform & GCP
 Backend bucket to store the state file as an object that can be accessed by the users working on the same project.
 
@@ -51,6 +52,75 @@ Reference: https://stackoverflow.com/questions/44711696/jenkins-403-no-valid-cru
 Credentials Configurations:
 - Create a credential for your Dockerhub account.
 - Secret file credentials that contains the VM service account key pair file in order to have access to the cluster.
+
+
+## Setup
+### Commands
+
+#### Creating resources with Terraform
+
+```bash
+    cd Terraform
+    terraform init                     #initializes a working directory and install plugins for google provider
+    terraform plan                     #to check the changes
+    terraform apply -auto-approve      #creating the resources on GCP
+```
+#### The VM Startup Script
+
+Installing kubectl: 
+```bash
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+Installing dockercli
+```bash
+    sudo apt-get update && sudo apt-get install ca-certificates curl gnupg lsb-release && sudo mkdir -p /etc/apt/keyrings
+
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+    echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+Installing the gcloud authentication plugin
+```bash
+    sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+```
+
+Installation References:
+- https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+- https://docs.docker.com/engine/install/ubuntu/
+- https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+
+#### SSH into the VM instance
+From the GUI --> ssh to the instance and then connect to the cluster
+```bash
+    gcloud container clusters get-credentials {cluster-id} --region {region} --project {project-id}
+```
+cluster-id = my-gke-cluster <br />
+region = us-central1 <br />
+project = neat-talent-367811
+
+#### Building the Dockerfile for jenkins and pushing to Dockerhub
+Create the Dockerfile: <br />
+Then:
+```bash
+    sudo docker build -t shassem/jenkinsgcp
+    sudo docker login
+    sudo docker push shassem/jenkinsgcp
+```
+#### Deploying the jenkins app
+Create the deployment.yml file <br />
+```bash
+    kubectl apply -f deployment.yml
+```
+Checking on the pods and getting the load balancer external IP
+```bash
+    kubectl get all -n jenkins
+```
+Output:
 
 ### Now you are ready to use Jenkins on a GKE cluster!🚀
 
