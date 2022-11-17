@@ -4,7 +4,7 @@
 Creating infrastructure and deployment process to implement and configue secure Google Container Cluster (GKE) on Google Cloud Platform (GCP) using Terraform (IaC).
 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
-[image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
+![image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
 
 ## Illustrations
 ### Tools
@@ -47,14 +47,14 @@ Deployment file:
 - Load balancer that listens on port 8080.
 
 You may get encountered by an error when you open the jenkins app for the first time:
-"HTTP ERROR 403 No valid crumb was included in the request".
-![Error 403](https://drive.google.com/uc?export=view&id=1uWzmRerXLqJxICcoFgz8crOIz2tvUiYd)
-or a reverse proxy broken message:
-![Error ReverseProxy](https://drive.google.com/uc?export=view&id=1LGGJkqUiE73AnajJGQ0pSYnS8O6SAM5N)
-This error may prevent the app to function properly. In order to fix this issue:
-Skip admin creation (optional: if you are stuck) --> Enter "Manage Jenkins" --> "Configure Global Security" --> "Enable proxy compatibility".
+"HTTP ERROR 403 No valid crumb was included in the request". <br />
+![Error 403](https://drive.google.com/uc?export=view&id=1uWzmRerXLqJxICcoFgz8crOIz2tvUiYd)<br />
+or a reverse proxy broken message:<br />
+![Error ReverseProxy](https://drive.google.com/uc?export=view&id=1LGGJkqUiE73AnajJGQ0pSYnS8O6SAM5N)<br />
+This error may prevent the app to function properly. In order to fix this issue: <br />
+Skip admin creation (optional: if you are stuck) --> Enter "Manage Jenkins" --> "Configure Global Security" --> "Enable proxy compatibility". <br />
 ![Enable proxy compatibility](https://drive.google.com/uc?export=view&id=1ZZWJvp1twjt4oktYUnDxfk8VjucAAWY_)
-Reference: https://stackoverflow.com/questions/44711696/jenkins-403-no-valid-crumb-was-included-in-the-request 
+Reference: https://stackoverflow.com/questions/44711696/jenkins-403-no-valid-crumb-was-included-in-the-request <br /> 
 
 Credentials Configurations:
 - Create a credential for your Dockerhub account.
