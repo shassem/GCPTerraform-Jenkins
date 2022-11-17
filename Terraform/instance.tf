@@ -40,6 +40,7 @@ resource "google_compute_instance" "privatevm" {
 
     EOF
   }
+
 # depends_on --> To wait for the cluster to be created so the last commands in the metadata can work
   # depends_on = [
   #       google_container_cluster.primary

@@ -1,9 +1,10 @@
 
-# GCP with Terraform and Jenkins (ITI Final Project)
+# GCP with Terraform and Jenkins (ITI Final Project Part One)
 
 Creating infrastructure and deployment process to implement and configue secure Google Container Cluster (GKE) on Google Cloud Platform (GCP) using Terraform (IaC).
 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
+[image](https://drive.google.com/file/d/19IdhZiowP98DnYK5cSMZLW69o9iuBGcb/view)
 
 ## Illustrations
 ### Tools
@@ -13,24 +14,24 @@ I used a private VM Instance to connect to an all-private GKE Cluster.
 
 Each tool implementations are written in its section.
 
-All work is applied on a single GCP project and region: us-central1.
+All work is applied on a single GCP project and region: us-central1. <br />
 Variables can be changed.
 
 ### Terraform & GCP
 Backend bucket to store the state file as an object that can be accessed by the users working on the same project.
 
-Network module is created that setups VPC Network with two subnets and the rest necessary configurations as shown below:
+Network module that setups VPC Network with two subnets and the rest necessary configurations as shown below:
 - Management subnet (Instance) / Cluster subnet (Cluster)
-- NAT service
+- NAT service for the private instance/cluster
 - Firewall that allows SSH and HTTP
 
-Private VM Instance with a service account that has Kubernetes Cluster Admin permission attached with the Management subnet so I can use it to manage the cluster GKE.
+Private VM Instance with a service account that has Kubernetes Cluster Admin permission attached with the Management subnet so I can use it to manage the cluster GKE. <br />
 Adding a start-up script that installs:
 - Docker --> to build/push images.
 - kubectl --> to apply kubernetes commands on the cluster.
 - gcloud authentication plugin --> to extend kubectl’s authentication to support GKE.
 
-Standard Google Container Cluster service with private control plane and working nodes, having a service account that has the Storage Admin permission. Giving the authorization to the created VM instance only.  
+Standard Google Container Cluster service with private control plane and working nodes. Letting the VM instance the only authorized instance to connect to the cluster. 
 
 ### Jenkins
 In order to let Jenkins connect to the cluster, I have to give the app the required credentials and use the gcloud command.
@@ -40,15 +41,19 @@ Dockerhub jenkins image repository: https://hub.docker.com/repository/docker/sha
 
 Deployment file:
 - Created a new namespace called "jenkins" for the jenkins app.
-- Init Containers to install docker and kubernetes so I can use docker cli and kubectl in the pipeline.
+- Init Containers to install docker and kubernetes and mounting the binary files so I can use docker cli and kubectl in the pipeline.
 - Mounting the docker.sock path so I can execute docker commands inside the application and to let the container deploy another containers on GKE.
 - Mounting jenkins_home to save all the configurations and details done in the jenkins app.
 - Load balancer that listens on port 8080.
 
 You may get encountered by an error when you open the jenkins app for the first time:
 "HTTP ERROR 403 No valid crumb was included in the request".
+![Error 403](https://drive.google.com/file/d/1uWzmRerXLqJxICcoFgz8crOIz2tvUiYd/view)
+or a reverse proxy broken message:
+![Error ReverseProxy](https://drive.google.com/file/d/1LGGJkqUiE73AnajJGQ0pSYnS8O6SAM5N/view)
 This error may prevent the app to function properly. In order to fix this issue:
 Skip admin creation (optional: if you are stuck) --> Enter "Manage Jenkins" --> "Configure Global Security" --> "Enable proxy compatibility".
+![Enable proxy compatibility](https://drive.google.com/file/d/1ZZWJvp1twjt4oktYUnDxfk8VjucAAWY_/view)
 Reference: https://stackoverflow.com/questions/44711696/jenkins-403-no-valid-crumb-was-included-in-the-request 
 
 Credentials Configurations:
@@ -63,7 +68,7 @@ Credentials Configurations:
 
 ```bash
     cd Terraform
-    terraform init                     #initializes a working directory and install plugins for google provider
+    terraform init                     #initializes a working directory and installs plugins for google provider
     terraform plan                     #to check the changes
     terraform apply -auto-approve      #creating the resources on GCP
 ```
@@ -122,10 +127,13 @@ Checking on the pods and getting the load balancer external IP
 ```bash
     kubectl get all -n jenkins
 ```
-Output:
+Get the Administrator Jenkins password from the pod logs
+```bash
+    kubectl logs pod/{podname} -n jenkins
+```
 
 ### Now you are ready to use Jenkins on a GKE cluster!🚀
 
-## Connected Repository:
+#### Connected Repository:
 
 CI/CD using Jenkins --> https://github.com/shassem/ITI-FinalProject-Jenkins 

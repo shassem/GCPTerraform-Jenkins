@@ -17,11 +17,11 @@ resource "google_service_account" "cluster-sv" {
   display_name = "Cluster Service Account"
 }
 
-resource "google_project_iam_binding" "cluster_service_account_iam" {
-  project = "neat-talent-367811"
-  role    = var.cluster_svrole
+# resource "google_project_iam_binding" "cluster_service_account_iam" {
+#   project = "neat-talent-367811"
+#   role    = var.cluster_svrole
 
-  members = [
-    "serviceAccount:${google_service_account.cluster-sv.email}",
-  ]
-}
+#   members = [
+#     "serviceAccount:${google_service_account.cluster-sv.email}",
+#   ]
+# }
