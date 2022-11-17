@@ -5,11 +5,12 @@ Creating infrastructure and deployment process to implement and configue secure 
 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
 
-## Illustration
+## Illustrations
 ### Tools
 - Terraform
 - Google Cloud Platform (GCP)
 - Jenkins
+
 Each tool implementations are written in its section.
 
 All work is applied on a single GCP project and region: us-central1.
@@ -40,7 +41,7 @@ Dockerhub jenkins image repository: https://hub.docker.com/repository/docker/sha
 Deployment file:
 - Created a new namespace called "jenkins" for the jenkins app.
 - Init Containers to install docker and kubernetes so I can use docker cli and kubectl in the pipeline.
-- Mounting the docker.sock path so I can execute docker commands inside the application.
+- Mounting the docker.sock path so I can execute docker commands inside the application and to let the container deploy another containers on GKE.
 - Mounting jenkins_home to save all the configurations and details done in the jenkins app.
 - Load balancer that listens on port 8080.
 

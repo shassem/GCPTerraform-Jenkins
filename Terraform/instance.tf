@@ -7,7 +7,7 @@ resource "google_compute_instance" "privatevm" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = var.vm_image
       labels = {
         my_label = "value"
       }
@@ -15,8 +15,8 @@ resource "google_compute_instance" "privatevm" {
   }
 
   network_interface {
-    network = google_compute_network.myvpc.id
-    subnetwork = google_compute_subnetwork.management_subnet.name
+    network = module.network.vpc_id
+    subnetwork = module.network.management_subnet_id
   }
 
   service_account {
@@ -44,20 +44,5 @@ resource "google_compute_instance" "privatevm" {
   # depends_on = [
   #       google_container_cluster.primary
   #   ]
-}
-
-
-resource "google_service_account" "vm_service_account" {
-  account_id   = "vm-sa-id"
-  display_name = "VM Service Account"
-}
-
-resource "google_project_iam_binding" "vm_service_account_iam" {
-  project = "neat-talent-367811"
-  role    = "roles/container.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.vm_service_account.email}",
-  ]
 }
 
