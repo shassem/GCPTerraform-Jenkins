@@ -48,12 +48,12 @@ Deployment file:
 
 You may get encountered by an error when you open the jenkins app for the first time:
 "HTTP ERROR 403 No valid crumb was included in the request". <br />
-![Error 403](https://drive.google.com/uc?export=view&id=1uWzmRerXLqJxICcoFgz8crOIz2tvUiYd)<br />
+![Error 403](https://drive.google.com/uc?export=view&id=1uWzmRerXLqJxICcoFgz8crOIz2tvUiYd) <br />
 or a reverse proxy broken message:<br />
-![Error ReverseProxy](https://drive.google.com/uc?export=view&id=1LGGJkqUiE73AnajJGQ0pSYnS8O6SAM5N)<br />
+![Error ReverseProxy](https://drive.google.com/uc?export=view&id=1LGGJkqUiE73AnajJGQ0pSYnS8O6SAM5N) <br />
 This error may prevent the app to function properly. In order to fix this issue: <br />
 Skip admin creation (optional: if you are stuck) --> Enter "Manage Jenkins" --> "Configure Global Security" --> "Enable proxy compatibility". <br />
-![Enable proxy compatibility](https://drive.google.com/uc?export=view&id=1ZZWJvp1twjt4oktYUnDxfk8VjucAAWY_)
+![Enable proxy compatibility](https://drive.google.com/uc?export=view&id=1ZZWJvp1twjt4oktYUnDxfk8VjucAAWY_) <br />
 Reference: https://stackoverflow.com/questions/44711696/jenkins-403-no-valid-crumb-was-included-in-the-request <br /> 
 
 Credentials Configurations:
