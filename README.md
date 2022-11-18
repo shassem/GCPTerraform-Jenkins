@@ -6,6 +6,7 @@ Creating infrastructure and deployment process to implement and configue secure 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
 ![image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
 
+
 ## Illustrations
 ### Tools
 - Terraform
