@@ -25,7 +25,7 @@ resource "google_compute_instance" "privatevm" {
     scopes = ["cloud-platform"]
   }
 
-#Installing kubectl and dockercli / Connecting to the cluster and creating two namespaces
+#Installing kubectl, dockercli , google cloud auth plugin
   metadata = {                                                    
     startup-script = <<-EOF
 
