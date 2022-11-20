@@ -7,7 +7,7 @@ I used a private VM Instance to connect to an all-private GKE Cluster.
 ![image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
 
 Project Part Two: A fully automated CI/CD pipeline using Jenkins to build and deploy an application whenever it gets updated on GitHub <br />
-URL --> https://github.com/shassem/ITI-FinalProject-Jenkins 
+The Application URL --> https://github.com/shassem/ITI-FinalProject-Jenkins 
 
 ## Illustrations
 ### Tools
