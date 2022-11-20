@@ -6,7 +6,7 @@ Creating infrastructure and deployment process using Terraform (IaC) to implemen
 I used a private VM Instance to connect to an all-private GKE Cluster. 
 ![image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
 
-## Project Part Two: A fully automated CI/CD pipeline using Jenkins to build and deploy an application whenever it gets updated on GitHub <br />
+### Project Part Two: A fully automated CI/CD pipeline using Jenkins to build and deploy an application whenever it gets updated on GitHub <br />
 The Application URL --> https://github.com/shassem/ITI-FinalProject-Jenkins 
 
 ## Illustrations
