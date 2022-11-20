@@ -1,11 +1,13 @@
 
 # GCP with Terraform and Jenkins (ITI Final Project Part One)
 
-Creating infrastructure and deployment process to implement and configue secure Google Container Cluster (GKE) on Google Cloud Platform (GCP) using Terraform (IaC).
+Creating infrastructure and deployment process using Terraform (IaC) to implement and configue secure Google Container Cluster (GKE) on Google Cloud Platform (GCP) to host Jenkins as Kubernetes pods.
 
 I used a private VM Instance to connect to an all-private GKE Cluster. 
 ![image](https://drive.google.com/uc?export=view&id=19IdhZiowP98DnYK5cSMZLW69o9iuBGcb)
 
+Project Part Two: A fully automated CI/CD pipeline using Jenkins to build and deploy an application whenever it gets updated on GitHub <br />
+URL --> https://github.com/shassem/ITI-FinalProject-Jenkins 
 
 ## Illustrations
 ### Tools
