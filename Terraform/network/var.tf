@@ -1,7 +1,7 @@
 variable "management_subnet" {
-    type = string
+  type = string
 }
 
 variable "cluster_subnet" {
-    type = string
+  type = string
 }
